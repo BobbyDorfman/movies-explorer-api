@@ -46,7 +46,7 @@ app.use(errorLogger); // подключаем логгер ошибок
 app.use(errors());
 app.use(serverError);
 
-mongoose.connect('mongodb://localhost:27017/bitfilmsdb', () => {
+mongoose.connect('mongodb://localhost:27017/moviesdb', () => {
   // eslint-disable-next-line no-console
   console.log('Подключение успешно');
 });
