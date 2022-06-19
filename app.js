@@ -4,12 +4,12 @@ const mongoose = require('mongoose');
 const { errors } = require('celebrate');
 // const cors = require('./middlewares/cors');
 const cors = require('cors');
-// const { createUser, login } = require('./controllers/users');
-// const { authorizationValidation, registrationValidation } = require('./middlewares/validation');
-// const { auth } = require('./middlewares/auth');
-// const routes = require('./routes');
-// const serverError = require('./middlewares/errors');
-// const { requestLogger, errorLogger } = require('./middlewares/logger');
+const { createUser, login } = require('./controllers/users');
+const { authorizationValidation, registrationValidation } = require('./middlewares/validation');
+const { auth } = require('./middlewares/auth');
+const routes = require('./routes/index');
+const serverError = require('./middlewares/errors');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 // Слушаем 3000 порт
 const { PORT = 3000 } = process.env;
@@ -30,23 +30,23 @@ app.get('/crash-test', () => {
   }, 0);
 });
 
-// app.use(requestLogger); // подключаем логгер запросов
+app.use(requestLogger); // подключаем логгер запросов
 
 // роуты, не требующие авторизации - регистрация и логин
-// app.post('/signup', registrationValidation, createUser);
-// app.post('/signin', authorizationValidation, login);
+app.post('/signup', registrationValidation, createUser);
+app.post('/signin', authorizationValidation, login);
 
 // авторизация
-// app.use(auth);
+app.use(auth);
 
-// app.use(routes);
+app.use(routes);
 
-// app.use(errorLogger); // подключаем логгер ошибок
+app.use(errorLogger); // подключаем логгер ошибок
 
 app.use(errors());
-// app.use(serverError);
+app.use(serverError);
 
-mongoose.connect('mongodb://localhost:27017/moviesdb', () => {
+mongoose.connect('mongodb://localhost:27017/bitfilmsdb', () => {
   // eslint-disable-next-line no-console
   console.log('Подключение успешно');
 });

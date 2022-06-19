@@ -21,6 +21,7 @@
     "express-winston": "^4.2.0",
     "joi-objectid": "^4.0.2",
     "jsonwebtoken": "^8.5.1",
+    "mongodb": "^4.7.0",
     "mongoose": "^6.3.3",
     "validator": "^13.7.0",
     "winston": "^3.7.2"
