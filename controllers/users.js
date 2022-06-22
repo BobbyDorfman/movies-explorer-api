@@ -8,8 +8,7 @@ const ConflictError = require('../errors/ConcflictError');
 const { JWT_SECRET, NODE_ENV } = process.env;
 
 const getUser = (req, res, next) => {
-  const { id } = req.params;
-  return User.findById(id)
+  User.findById(req.user._id)
     .orFail(() => {
       throw new NotFoundError('Пользователь по указанному _id не найден');
     })
@@ -50,9 +49,9 @@ const createUser = (req, res, next) => {
 };
 
 const updateUser = (req, res, next) => {
-  const { name } = req.body;
+  const { name, email } = req.body;
 
-  return User.findByIdAndUpdate(req.user._id, { name }, { new: true })
+  return User.findByIdAndUpdate(req.user._id, { name, email }, { runValidators: true, new: true })
     .orFail(() => {
       throw new NotFoundError('Пользователь с указанным _id не найден');
     })
@@ -60,6 +59,8 @@ const updateUser = (req, res, next) => {
     .catch((err) => {
       if (err.name === 'ValidationError' || err.name === 'CastError') {
         next(new ValidationError('Переданы некорректные данные при обновлении профиля'));
+      } if (err.code === 11000) {
+        next(new ConflictError('Пользователь с таким email уже существует'));
       } else {
         next(err);
       }

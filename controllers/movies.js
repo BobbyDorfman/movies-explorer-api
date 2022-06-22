@@ -49,18 +49,23 @@ const createMovie = (req, res, next) => {
 };
 
 const deleteMovie = (req, res, next) => {
-  const movieId = req.params.id;
+  const movieId = req.params._id;
   return Movie.findById(movieId)
     .orFail(() => {
       throw new NotFoundError('Фильм с указанным _id не найден');
     })
     .then((movie) => {
       if (movie.owner.toString() === req.user._id) {
-        Movie.findByIdAndRemove(movieId)
+        return Movie.findByIdAndRemove(movieId)
           .then(() => res.status(200).send(movie));
-      } else {
-        throw new ForbiddenError('Вы не можете удалить чужую карточку');
       }
+      throw new ForbiddenError('Вы не можете удалить чужую карточку');
+    })
+    .catch((err) => {
+      if (err.name === 'CastError') {
+        throw new ValidationError('Переданы некорректные данные при удалении карточки фильма');
+      }
+      throw err;
     })
     .catch(next);
 };
