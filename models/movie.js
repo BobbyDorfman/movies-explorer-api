@@ -55,7 +55,7 @@ const movieSchema = new mongoose.Schema({
   movieId: {
     type: Number,
     required: true,
-    unique: true,
+    // unique: true, //TODO 22.07.2022 чтобы поле movieId не было уникальным
   },
   nameRU: {
     type: String,
