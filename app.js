@@ -13,17 +13,16 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const MONGODB_ADDRESS = require('./utils/config');
 
 // Слушаем 3000 порт
-const { PORT = 3001, URL, NODE_ENV } = process.env;
+const { PORT = 3000, URL, NODE_ENV } = process.env;
 const app = express();
 app.use(bodyParser.json());
 
 // app.use(cors);
 app.use(cors({
   origin: [
-    // TODO
-    'http://localhost:3000',
-    // 'http://api.bobbydorfman.movies.nomoredomains.xyz',
-    // 'https://api.bobbydorfman.movies.nomoredomains.xyz',
+    // 'http://localhost:3000',
+    'http://api.bobbydorfman.movies.nomoredomains.xyz',
+    'https://api.bobbydorfman.movies.nomoredomains.xyz',
   ],
   credentials: true,
 }));
