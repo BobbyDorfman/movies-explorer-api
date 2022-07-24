@@ -15,7 +15,6 @@ const MONGODB_ADDRESS = require('./utils/config');
 // Слушаем 3000 порт
 const { PORT = 3000, URL, NODE_ENV } = process.env;
 const app = express();
-app.use(bodyParser.json());
 
 app.use(cors());
 // app.use(cors({
@@ -24,8 +23,10 @@ app.use(cors());
 //     'http://bobbydorfman.movies.nomoredomains.xyz',
 //     'https://bobbydorfman.movies.nomoredomains.xyz',
 //   ],
-//   // credentials: true,
+//   credentials: true,
 // }));
+
+app.use(bodyParser.json());
 
 app.get('/crash-test', () => {
   setTimeout(() => {
