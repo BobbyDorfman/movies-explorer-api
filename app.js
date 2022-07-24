@@ -24,7 +24,7 @@ app.use(cors({
     'http://bobbydorfman.movies.nomoredomains.xyz',
     'https://bobbydorfman.movies.nomoredomains.xyz',
   ],
-  credentials: true,
+  // credentials: true,
 }));
 
 app.get('/crash-test', () => {

@@ -2,10 +2,10 @@
 const allowedCors = [
   'http://localhost:3000',
   'http://localhost:3001',
-  'http://bobbydorfman.nomoredomains.xyz',
-  'https://bobbydorfman.nomoredomains.xyz',
-  'http://api.bobbydorfman.mesto.nomoredomains.xyz',
-  'https://api.bobbydorfman.mesto.nomoredomains.xyz',
+  'http://bobbydorfman.movies.nomoredomains.xyz',
+  'https://bobbydorfman.movies.nomoredomains.xyz',
+  'http://api.bobbydorfman.movies.nomoredomains.xyz',
+  'https://api.bobbydorfman.movies.nomoredomains.xyz',
 ];
 
 const cors = (req, res, next) => {
