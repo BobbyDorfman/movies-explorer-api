@@ -16,7 +16,7 @@ const MONGODB_ADDRESS = require('./utils/config');
 const { PORT = 3000, URL, NODE_ENV } = process.env;
 const app = express();
 
-app.use(cors());
+app.use(cors);
 // app.use(cors({
 //   origin: [
 //     // 'http://localhost:3000',
