@@ -4,8 +4,8 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
 const { errors } = require('celebrate');
-// const cors = require('./middlewares/cors');
-const cors = require('cors');
+const cors = require('./middlewares/cors');
+// const cors = require('cors');
 const routes = require('./routes/index');
 const limiter = require('./middlewares/limiter');
 const serverError = require('./middlewares/errors');
@@ -17,15 +17,15 @@ const { PORT = 3000, URL, NODE_ENV } = process.env;
 const app = express();
 app.use(bodyParser.json());
 
-// app.use(cors);
-app.use(cors({
-  origin: [
-    // 'http://localhost:3000',
-    'http://bobbydorfman.movies.nomoredomains.xyz',
-    'https://bobbydorfman.movies.nomoredomains.xyz',
-  ],
-  // credentials: true,
-}));
+app.use(cors());
+// app.use(cors({
+//   origin: [
+//     // 'http://localhost:3000',
+//     'http://bobbydorfman.movies.nomoredomains.xyz',
+//     'https://bobbydorfman.movies.nomoredomains.xyz',
+//   ],
+//   // credentials: true,
+// }));
 
 app.get('/crash-test', () => {
   setTimeout(() => {
