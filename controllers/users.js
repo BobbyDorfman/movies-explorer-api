@@ -12,7 +12,8 @@ const getUser = (req, res, next) => {
     .orFail(() => {
       throw new NotFoundError('Пользователь по указанному _id не найден');
     })
-    .then((user) => res.status(200).send(user))
+    .then((user) => res.status(200).send({ user })) // TODO 29.07.2022
+    // .then((user) => res.status(200).send(user))
     .catch((err) => {
       if (err.name === 'CastError') {
         next(new ValidationError('Переданы некорректные данные'));
@@ -36,12 +37,12 @@ const createUser = (req, res, next) => {
       email,
       password: hash,
     }))
-    // .then((user) => res.status(201).send(user)) // Правка от 23.07.2022
-    .then((user) => res.send({
-      _id: user._id,
-      name,
-      email,
-    }))
+    .then((user) => res.status(201).send(user)) // Правка от 23.07.2022
+    // .then((user) => res.send({
+    //   _id: user._id,
+    //   name,
+    //   email,
+    // }))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new ValidationError('Переданы некорректные данные при создании пользователя'));
